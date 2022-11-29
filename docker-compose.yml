@@ -1,0 +1,29 @@
+services:
+
+  test_db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Test_password_123
+    ports:
+      - 1433:1433
+    container_name: test_db
+    volumes:
+      - test_db_volume:/var/opt/mssql
+  
+
+  data_ingestion:
+    image: data_ingestion
+    container_name: data_ingestion
+    build:
+      context: .
+      dockerfile: dockerfile.data_ingestion
+    volumes:
+      - ./data_ingestion:/data_ingestion
+      - ./input:/input:rw
+    # command: python data_ingestion.py --dir_config "/input/config/${DATA_INGESTION_CONFIG}"
+
+volumes:
+  test_db_volume:
+    external: false
+

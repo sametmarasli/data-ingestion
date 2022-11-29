@@ -1,0 +1,19 @@
+{
+    "db_configuration":
+    {
+        "username":"sa",
+        "password":"Test_password_123",
+        "host":"test_db",
+        "port":"1433",
+        "database":"master",
+        "schema_name":"fantino"
+    },
+
+    "dir_files":
+    [
+        "/input/raw_data/Pjt Fantino - Loan Data Tape.xlsx"
+    ],
+
+    "clean_schema" : "True"
+
+}

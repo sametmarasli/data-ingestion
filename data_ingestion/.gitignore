@@ -1,0 +1,5 @@
+*.pyc
+*.html
+.python-version
+.pytest_cache
+notebooks

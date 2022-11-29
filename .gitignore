@@ -1,0 +1,9 @@
+*.pyc
+*.html
+.python-version
+src/python_apps/modules.egg-info/**
+src/python_apps/build/**
+src/python_apps/.ipy**
+src/r_apps/.config
+src/r_apps/.local
+src/data_prep_test/**

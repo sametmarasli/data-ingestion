@@ -1,0 +1,24 @@
+FROM python:3.9.12-bullseye
+
+# setting the sql server driver
+RUN apt update
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+SHELL ["/bin/bash", "-c"] 
+RUN apt-get install -y unixodbc-dev
+
+# set up location of code
+WORKDIR /data_ingestion
+# lets us import from folders inside /src/loader directly
+ENV PYTHONPATH=/data_ingestion
+# COPY our code folder to docker
+COPY ./data_ingestion /data_ingestion
+# install python requirements
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# keep our docker container running
+CMD ["tail", "-f", "/dev/null"]
+
+
