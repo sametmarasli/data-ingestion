@@ -5,8 +5,11 @@ build:
 	docker-compose --env-file .env build
 
 up:
-	docker-compose --env-file .env up -d $(service)
+	docker-compose --env-file .env up -d
 
+up_service:
+	docker-compose --env-file .env up -d $(service)
+	
 down:
 	docker-compose down 
 
